@@ -32,7 +32,7 @@ public class LoginIntercepter implements Interceptor {
             if (responseBody != null) {
                 String responeStr = response.body().string();
                 CommResponse commResponse = GsonManager.getInstance().build().fromJson(responeStr, CommResponse.class);
-                if (NoteBookConst.RESPONSE_SINGIN_INVALID == commResponse.getErrorCode()) {
+                if (commResponse != null && NoteBookConst.RESPONSE_SINGIN_INVALID == commResponse.getErrorCode()) {
                     String name = PreferencesUtil.getPreference(PreferencesConst.USER_NAME, "");
                     String pass = PreferencesUtil.getPreference(PreferencesConst.PASSWORD, "");
                     FormBody.Builder requestBody = new FormBody.Builder();
