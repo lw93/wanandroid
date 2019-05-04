@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="with_1">1dp</dimen>
+    <dimen name="with_2">2dp</dimen>
+    <dimen name="with_4">4dp</dimen>
+    <dimen name="with_8">8dp</dimen>
+    <dimen name="with_12">12dp</dimen>
+    <dimen name="with_16">16dp</dimen>
+    <dimen name="with_18">18dp</dimen>
+    <dimen name="with_24">24dp</dimen>
+    <dimen name="with_32">32dp</dimen>
+    <dimen name="with_36">36dp</dimen>
+    <dimen name="with_48">48dp</dimen>
+    <dimen name="with_56">56dp</dimen>
+    <dimen name="with_72">72dp</dimen>
+    <dimen name="with_96">96dp</dimen>
+    <dimen name="with_144">144dp</dimen>
+    <dimen name="with_192">192dp</dimen>
+    <dimen name="with_256">256dp</dimen>
+    <dimen name="with_512">512dp</dimen>
+
+
+    <dimen name="height_1">1dp</dimen>
+    <dimen name="height_2">2dp</dimen>
+    <dimen name="height_4">4dp</dimen>
+    <dimen name="height_8">8dp</dimen>
+    <dimen name="height_12">12dp</dimen>
+    <dimen name="height_16">16dp</dimen>
+    <dimen name="height_18">18dp</dimen>
+    <dimen name="height_24">24dp</dimen>
+    <dimen name="height_32">32dp</dimen>
+    <dimen name="height_36">36dp</dimen>
+    <dimen name="height_48">48dp</dimen>
+    <dimen name="height_56">56dp</dimen>
+    <dimen name="height_72">72dp</dimen>
+    <dimen name="height_96">96dp</dimen>
+    <dimen name="height_144">144dp</dimen>
+    <dimen name="height_192">192dp</dimen>
+    <dimen name="height_256">256dp</dimen>
+    <dimen name="height_512">512dp</dimen>
+
+    <dimen name="padding_2">2dp</dimen>
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_12">12dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="padding_18">18dp</dimen>
+    <dimen name="padding_24">24dp</dimen>
+    <dimen name="padding_32">32dp</dimen>
+    <dimen name="padding_36">36dp</dimen>
+    <dimen name="padding_48">48dp</dimen>
+    <dimen name="padding_56">56dp</dimen>
+    <dimen name="padding_72">72dp</dimen>
+    <dimen name="padding_96">96dp</dimen>
+    <dimen name="padding_144">144dp</dimen>
+    <dimen name="padding_192">192dp</dimen>
+    <dimen name="padding_256">256dp</dimen>
+    <dimen name="padding_512">512dp</dimen>
+
+    <dimen name="corner_2">2dp</dimen>
+    <dimen name="corner_4">4dp</dimen>
+    <dimen name="corner_8">8dp</dimen>
+    <dimen name="corner_12">12dp</dimen>
+    <dimen name="corner_16">16dp</dimen>
+    <dimen name="corner_18">18dp</dimen>
+    <dimen name="corner_24">24dp</dimen>
+    <dimen name="corner_32">32dp</dimen>
+    <dimen name="corner_36">36dp</dimen>
+    <dimen name="corner_48">48dp</dimen>
+    <dimen name="corner_56">56dp</dimen>
+    <dimen name="corner_72">72dp</dimen>
+    <dimen name="corner_96">96dp</dimen>
+    <dimen name="corner_144">144dp</dimen>
+    <dimen name="corner_192">192dp</dimen>
+    <dimen name="corner_256">256dp</dimen>
+    <dimen name="corner_512">512dp</dimen>
+
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_12">12dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_18">18dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
+    <dimen name="margin_32">32dp</dimen>
+    <dimen name="margin_36">36dp</dimen>
+    <dimen name="margin_48">48dp</dimen>
+    <dimen name="margin_56">56dp</dimen>
+    <dimen name="margin_72">72dp</dimen>
+    <dimen name="margin_96">96dp</dimen>
+    <dimen name="margin_144">144dp</dimen>
+    <dimen name="margin_192">192dp</dimen>
+    <dimen name="margin_256">256dp</dimen>
+    <dimen name="margin_512">512dp</dimen>
+
+    <dimen name="text_size_8">8sp</dimen>
+    <dimen name="text_size_10">10sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
+    <dimen name="text_size_24">24sp</dimen>
+
+    <!--//选中时的最大宽度-->
+    <dimen name="design_bottom_navigation_active_item_max_width">168dp</dimen>
+    <!--//选中时的字体大小-->
+    <dimen name="design_bottom_navigation_active_text_size">14sp</dimen>
+    <!--//阴影的大小-->
+    <dimen name="design_bottom_navigation_elevation">8dp</dimen>
+    <!--//高度-->
+    <dimen name="design_bottom_navigation_height">56dp</dimen>
+    <!--//未选中的最大宽度-->
+    <dimen name="design_bottom_navigation_item_max_width">96dp</dimen>
+    <!--//未选中的最小的宽度-->
+    <dimen name="design_bottom_navigation_item_min_width">56dp</dimen>
+    <!--//icon与文本之间的间距-->
+    <dimen name="design_bottom_navigation_margin">8dp</dimen>
+    <!--//阴影高度-->
+    <dimen name="design_bottom_navigation_shadow_height">1dp</dimen>
+    <!--//未选中时的字体大小-->
+    <dimen name="design_bottom_navigation_text_size">12sp</dimen>
+
+</resources>

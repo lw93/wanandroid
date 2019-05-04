@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#61c60e</color>
+    <color name="colorPrimaryDark">#61c60e</color>
+    <color name="colorAccent">#61c60e</color>
+    <!--<color name="colorAccent">#76ff03</color>-->
+    <color name="divider_color">#9E9E9E</color>
+    <color name="layout_background_color">#EDEFF2</color>
+    <color name="color_grey">#CCCCCC</color>
+    <color name="colorPrimaryCustomDark">#76ea17</color>
+    <color name="transparent_80">#80000000</color>
+    <color name="tab_title_color">#D9D9D9</color>
+</resources>

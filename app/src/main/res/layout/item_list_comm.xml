@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_item_list_color"
+    android:padding="@dimen/padding_16">
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="@dimen/with_36"
+        android:layout_height="@dimen/height_56"
+        android:layout_marginTop="@dimen/margin_8"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_holder_empty"
+        android:visibility="gone" />
+
+    <!--app:layout_constraintBottom_toTopOf="@+id/guide_bottom"-->
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height_56"
+        android:layout_marginLeft="@dimen/margin_8"
+        android:layout_marginStart="@dimen/margin_8"
+        android:layout_marginTop="@dimen/margin_8"
+        android:ellipsize="end"
+        android:gravity="center|start"
+        android:maxLines="3"
+        android:text="Android性能优化：关于 内存泄露 的知识都在这里了！（文不如图，图不如表）"
+        android:textAppearance="@style/PrimaryText_black_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_img"
+        app:layout_goneMarginLeft="0dp" />
+
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guide_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/margin_56" />
+
+
+    <TextView
+        android:id="@+id/tv_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rectangular_edge_red"
+        android:includeFontPadding="false"
+        android:paddingBottom="@dimen/padding_2"
+        android:paddingLeft="@dimen/padding_4"
+        android:paddingRight="@dimen/padding_4"
+        android:paddingTop="@dimen/padding_2"
+        android:text="最新"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="@dimen/sp_12"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guide_bottom" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="tv_tag" />
+
+
+    <TextView
+        android:id="@+id/tv_auther"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_8"
+        android:paddingStart="@dimen/padding_8"
+        android:text="作者: xiuyuan "
+        android:textAppearance="@style/PrimaryText_darker_gray_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_type"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/guide_bottom" />
+
+
+    <TextView
+        android:id="@+id/tv_type"
+        android:layout_width="@dimen/with_96"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="分类: 公众号"
+        android:textAppearance="@style/PrimaryText_darker_gray_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_time"
+        app:layout_constraintStart_toEndOf="@+id/tv_auther"
+        app:layout_constraintTop_toBottomOf="@+id/guide_bottom" />
+
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5分钟之前"
+        android:textAppearance="@style/PrimaryText_darker_gray_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cb_collection"
+        app:layout_constraintStart_toEndOf="@+id/tv_type"
+        app:layout_constraintTop_toBottomOf="@+id/guide_bottom" />
+
+    <CheckBox
+        android:id="@+id/cb_collection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/select_cb_collect_status"
+        android:checked="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/tv_time"
+        app:layout_constraintTop_toBottomOf="@+id/guide_bottom" />
+
+</android.support.constraint.ConstraintLayout>

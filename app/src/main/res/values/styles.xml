@@ -1,0 +1,120 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- 防止欢迎页白屏或者黑屏，设置图片 -->
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@mipmap/ic_splash</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="PrimaryText_white_12">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="PrimaryText_white_14">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="PrimaryText_white_16">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="PrimaryText_white_18">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="PrimaryText_white_24">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_24</item>
+    </style>
+
+
+    <style name="PrimaryText_black_12">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="PrimaryText_black_14">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="PrimaryText_black_16">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="PrimaryText_black_18">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="PrimaryText_black_24">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/text_size_24</item>
+    </style>
+
+    <style name="PrimaryText_darker_gray_12">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="PrimaryText_darker_gray_14">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="PrimaryText_darker_gray_16">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="PrimaryText_darker_gray_18">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="PrimaryText_darker_gray_24">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">@dimen/text_size_24</item>
+    </style>
+
+    <style name="BtnPrimaryBackground_Text_grey" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/selector_btn_color</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="BtnPrimaryBackground_Text_white" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/selector_btn_color</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!--自定义Dialog背景全透明无边框theme-->
+    <style name="ProgressLoadingStyle" parent="android:style/Theme.Dialog">
+        <!--背景颜色和透明程度-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--是否去除标题-->
+        <item name="android:windowNoTitle">true</item>
+        <!--是否去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="DatePickerTheme" parent="Theme.AppCompat.Light.Dialog"/>
+
+</resources>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/layout_background_color">
+
+    <include
+        android:id="@+id/layout_bar"
+        layout="@layout/app_search_toolbar" />
+
+    <TextView
+        android:id="@+id/tv_search_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/margin_16"
+        android:text="搜索记录"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintTop_toBottomOf="@+id/layout_bar" />
+
+    <TextView
+        android:id="@+id/tv_clear_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/margin_16"
+        android:text="清空记录"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_search_history"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_search_history" />
+
+    <com.zhy.view.flowlayout.TagFlowLayout
+        android:id="@+id/tg_search_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_16"
+        app:layout_constraintTop_toBottomOf="@+id/tv_search_history">
+
+    </com.zhy.view.flowlayout.TagFlowLayout>
+
+    <android.support.constraint.Group
+        android:id="@+id/group_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="tv_search_history,tv_clear_history,tg_search_history" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierAllowsGoneWidgets="true"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="tv_search_history,tv_clear_history,tg_search_history" />
+
+
+    <TextView
+        android:id="@+id/tv_hot_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/ic_whatshot_red_24dp"
+        android:drawablePadding="@dimen/padding_4"
+        android:drawableRight="@drawable/ic_whatshot_red_24dp"
+        android:gravity="center"
+        android:padding="@dimen/margin_16"
+        android:text="热门搜索"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintTop_toBottomOf="@+id/barrier_search" />
+
+    <com.zhy.view.flowlayout.TagFlowLayout
+        android:id="@+id/tg_hot_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_16"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hot_search">
+
+    </com.zhy.view.flowlayout.TagFlowLayout>
+
+    <include layout="@layout/layout_empty" />
+
+</android.support.constraint.ConstraintLayout>

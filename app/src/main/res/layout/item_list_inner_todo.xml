@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_8">
+
+    <TextView
+        android:id="@+id/tv_title_inner_todo"
+        style="@style/PrimaryText_black_16"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center|start"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_change_done_inner"
+        app:layout_constraintEnd_toStartOf="@+id/tv_change_done_inner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_detail_inner_todo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="start|center"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_delete_inner_todo"
+        app:layout_constraintEnd_toStartOf="@+id/tv_change_done_inner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_inner_todo" />
+
+    <CheckBox
+        android:id="@+id/tv_change_done_inner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="完成"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_title_inner_todo" />
+
+    <TextView
+        android:id="@+id/tv_delete_inner_todo"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/height_36"
+        android:drawableLeft="@drawable/select_remove_todo"
+        android:drawablePadding="@dimen/padding_4"
+        android:drawableStart="@drawable/select_remove_todo"
+        android:gravity="center"
+        android:text="删除"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_change_done_inner" />
+
+</android.support.constraint.ConstraintLayout>

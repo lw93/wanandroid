@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/layout_bar"
+        layout="@layout/app_toolbar" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_todo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintTop_toBottomOf="@+id/layout_bar">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_todo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <include layout="@layout/layout_empty" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fb_add_todo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="mini"
+        android:layout_marginBottom="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginRight="@dimen/margin_16"
+        android:src="@drawable/ic_add_white_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/layout_background_color"
+        app:layout_constraintBottom_toTopOf="@+id/tv_todo" />
+
+    <TextView
+        android:id="@+id/tv_todo"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height_56"
+        android:drawablePadding="@dimen/padding_4"
+        android:drawableTop="@drawable/ic_event_note_primary_24dp"
+        android:gravity="center"
+        android:paddingBottom="@dimen/padding_4"
+        android:paddingTop="@dimen/padding_4"
+        android:text="待办"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_done"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_done"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height_56"
+        android:drawablePadding="@dimen/padding_4"
+        android:drawableTop="@drawable/ic_event_available_grey_24dp"
+        android:gravity="center"
+        android:paddingBottom="@dimen/padding_4"
+        android:paddingTop="@dimen/padding_4"
+        android:text="已完成"
+        android:textColor="@color/divider_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_todo" />
+
+
+</android.support.constraint.ConstraintLayout>
