@@ -19,7 +19,7 @@ import okhttp3.HttpUrl;
 
 public class CookieCache implements CookieJar {
 
-    private static final HashMap<HttpUrl, List<Cookie>> mCookieStore = new HashMap<>(7);
+    private static final HashMap<String, List<Cookie>> mCookieStore = new HashMap<>(7);
 
     @Override
     public void saveFromResponse(@NonNull HttpUrl url, @NonNull List<Cookie> cookies) {
@@ -27,12 +27,12 @@ public class CookieCache implements CookieJar {
 //            mCookieStore.clear();
 //            return;
 //        }
-        mCookieStore.put(HttpUrl.parse(url.host()), cookies);
+        mCookieStore.put(url.host(), cookies);
     }
 
     @Override
     public List<Cookie> loadForRequest(@NonNull HttpUrl url) {
-        List<Cookie> cookies = mCookieStore.get(HttpUrl.parse(url.host()));
+        List<Cookie> cookies = mCookieStore.get(url.host());
         return null != cookies ? cookies : new ArrayList<Cookie>();
     }
 }
