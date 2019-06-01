@@ -24,7 +24,7 @@ public class HttpCacheInterceptor implements Interceptor {
 
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
-        Request request = chain.request();
+        Request request = chain.request().newBuilder().addHeader("Connection","close").build();
         if (!NetworkUtil.isNetWorkAvailable()) { // 无网络时 设置超时为1周
             CacheControl FORCE_CACHE = new CacheControl.Builder()
                     .onlyIfCached()
