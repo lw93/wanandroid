@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.facebook.stetho.Stetho;
+import com.miui.zeus.mimo.sdk.MimoSdk;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
@@ -64,11 +65,15 @@ public class AppConfiguration implements IThirdConfig, Thread.UncaughtExceptionH
 
     public AppConfiguration initAppConfiguration(Application application) {
         this.mApplication = application;
+        Stetho.initializeWithDefaults(application);
+        MimoSdk.init(application, BuildConfig.AD_APP_ID, "fake_app_key", "fake_app_token");
         if (!BuildConfig.DEBUG) {
             Thread.setDefaultUncaughtExceptionHandler(this);
             SecurityUtil.apkVerify(mApplication);
+        } else {
+            MimoSdk.setDebugOn();
+            MimoSdk.setStageOn();
         }
-        Stetho.initializeWithDefaults(application);
 //        Stetho.initialize(
 //                Stetho.newInitializerBuilder(application)
 //                        .enableDumpapp(

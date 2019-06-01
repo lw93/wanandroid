@@ -129,6 +129,19 @@ android {
             ]
             signingConfig signingConfigs.special
         }
+        xiaomi {
+            applicationId "com.xy.personal.notebook"
+            manifestPlaceholders = [
+                    AMAP_KEY          : AMAP_KEY,
+                    BUGLY_APPID       : BUGLY_APPID,
+                    BUGLY_APP_CHANNEL : "dev",
+                    BUGLY_ENABLE_DEBUG: true,
+                    HOTFIX_APPID      : HOTFIX_APPID,
+                    HOTFIX_APPSECRET  : HOTFIX_APPSECRET,
+                    HOTFIX_RSASECRET  : HOTFIX_RSASECRET
+            ]
+            signingConfig signingConfigs.special
+        }
     }
 
     // 配置GreenDao基本参数
@@ -168,6 +181,12 @@ android {
 
 
     applicationVariants.all { variant ->
+
+        if (variant.getName().contains("Debug")) {
+            buildConfigField "String", "AD_APP_ID", "\"2882303761517411490\""
+        } else {
+            buildConfigField "String", "AD_APP_ID", "\"2882303761518009814\""
+        }
         variant.outputs.all {
             if (variant.getName().contains("Debug") || variant.getName().contains("Test")) {
                 if (outputFileName.endsWith(".apk")) {

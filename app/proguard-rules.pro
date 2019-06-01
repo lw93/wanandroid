@@ -314,3 +314,10 @@ public static java.lang.String TABLENAME;
 -keep class com.youth.banner.** {
     *;
  }
+ -keep class com.xiaomi.ad.** {
+     *;
+ }
+
+ -keep class com.miui.zeus.**{
+     *;
+ }
