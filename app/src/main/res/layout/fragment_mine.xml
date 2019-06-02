@@ -51,5 +51,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guide_mine" />
 
+    <FrameLayout
+        android:id="@+id/container_mine"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_56"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

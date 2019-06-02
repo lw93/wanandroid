@@ -28,6 +28,8 @@
         tools:replace="android:allowBackup">
         <activity
             android:name=".splash.SplashActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +37,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainActivity">
+        <activity
+            android:name=".main.MainActivity"
+            android:screenOrientation="portrait">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -88,34 +92,52 @@
 
         <activity
             android:name=".login.LoginActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan" />
 
         <activity
             android:name=".login.RegisterActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan" />
 
-        <activity android:name=".web.WebActivity" />
+        <activity
+            android:name=".web.WebActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".main.activity.KnowledgeSystemDetailActivity" />
+        <activity
+            android:name=".main.activity.KnowledgeSystemDetailActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".main.activity.SearchActivity" />
+        <activity
+            android:name=".main.activity.SearchActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".main.activity.SearchDetailActivity" />
+        <activity
+            android:name=".main.activity.SearchDetailActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".main.activity.AboutActivity" />
+        <activity
+            android:name=".main.activity.AboutActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".main.activity.CollectionActivity" />
+        <activity
+            android:name=".main.activity.CollectionActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".main.activity.TODOActivity" />
+        <activity
+            android:name=".main.activity.TODOActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".main.activity.UpdateTODOActivity" />
+        <activity
+            android:name=".main.activity.UpdateTODOActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.miui.zeus.mimo.sdk.activityProxy.ProxyActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 
     </application>
 

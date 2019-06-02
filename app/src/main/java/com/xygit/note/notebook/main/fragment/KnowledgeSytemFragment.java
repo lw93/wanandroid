@@ -100,7 +100,7 @@ public class KnowledgeSytemFragment extends BaseFragment implements View.OnClick
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        HttpManager.getInstance().quryTreeDatas(this,new CommSubscriber<List<Children>>(getActivity()) {
+        HttpManager.getInstance().quryTreeDatas(this, new CommSubscriber<List<Children>>(getActivity()) {
             @Override
             protected void onSucess(CommResponse<List<Children>> listCommResponse) {
                 if (listCommResponse != null) {
@@ -109,6 +109,12 @@ public class KnowledgeSytemFragment extends BaseFragment implements View.OnClick
                     knowledgeSystemAdapter.addItems(childrenList);
                     hideProgress();
                 }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                hideProgress();
             }
         });
     }

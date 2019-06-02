@@ -112,6 +112,12 @@ public class NavigationFragment extends BaseFragment implements View.OnClickList
                     hideProgress();
                 }
             }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                hideProgress();
+            }
         });
     }
 

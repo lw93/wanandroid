@@ -12,11 +12,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.miui.zeus.mimo.sdk.ad.AdWorkerFactory;
+import com.miui.zeus.mimo.sdk.ad.IAdWorker;
+import com.miui.zeus.mimo.sdk.listener.MimoAdListener;
+import com.xiaomi.ad.common.pojo.AdType;
 import com.xygit.note.notebook.R;
 import com.xygit.note.notebook.adapter.BaseRecyclerAdapter;
+import com.xygit.note.notebook.adv.MiAdvType;
 import com.xygit.note.notebook.api.CommResponse;
 import com.xygit.note.notebook.api.vo.LoginResult;
 import com.xygit.note.notebook.base.BaseApplication;
@@ -58,6 +64,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     private List<MineFunction> functions;
     private MineFunctionAdapter functionAdapter;
     private ProgressLoading loading;
+    private ViewGroup containerMine;
+    private IAdWorker advBanner;
 
     @Override
     public int layoutId() {
@@ -69,6 +77,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         ivHeader = rootView.findViewById(R.id.iv_header_mine);
         tvLoginStatus = rootView.findViewById(R.id.tv_login_mine);
         rvFunctions = rootView.findViewById(R.id.rv_function_mine);
+        containerMine = rootView.findViewById(R.id.container_mine);
     }
 
     @Override
@@ -76,6 +85,46 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         ivHeader.setOnClickListener(this);
         EventBus.getDefault().register(this);
         BaseApplication.getDefaultPreferences().registerOnSharedPreferenceChangeListener(this);
+        initBanner();
+    }
+
+    private void initBanner() {
+        try {
+            advBanner = AdWorkerFactory.getAdWorker(getActivity(), containerMine, new MimoAdListener() {
+                @Override
+                public void onAdPresent() {
+
+                }
+
+                @Override
+                public void onAdClick() {
+
+                }
+
+                @Override
+                public void onAdDismissed() {
+
+                }
+
+                @Override
+                public void onAdFailed(String s) {
+
+                }
+
+                @Override
+                public void onAdLoaded(int i) {
+
+                }
+
+                @Override
+                public void onStimulateSuccess() {
+
+                }
+            }, AdType.AD_BANNER);
+            advBanner.loadAndShow(MiAdvType.banner.getAdvId());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -110,6 +159,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 loading.dismiss();
             }
             loading = null;
+        }
+        if (advBanner != null) {
+            try {
+                advBanner.recycle();
+            } catch (Exception ex) {
+
+            }
         }
         EventBus.getDefault().unregister(this);
         BaseApplication.getDefaultPreferences().unregisterOnSharedPreferenceChangeListener(this);
@@ -180,6 +236,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     private void toLogOut() {
+        if ("登陆".equals(tvLoginStatus.getText().toString())) {
+            ToastUtil.showToast("您已退出登陆");
+            return;
+        }
         HttpManager.getInstance().logout(this, new CommSubscriber<Object>(getActivity()) {
             @Override
             protected void onSucess(CommResponse<Object> objectCommResponse) {

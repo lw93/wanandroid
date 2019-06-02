@@ -27,4 +27,10 @@
 
     </com.zhy.view.flowlayout.TagFlowLayout>
 
+    <FrameLayout
+        android:id="@+id/container_stimulate_system"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
 </LinearLayout>

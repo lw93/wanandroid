@@ -15,18 +15,23 @@ android {
         ndk {
             abiFilters "armeabi"
         }
-        externalNativeBuild {
-            cmake {
-                // Sets optional flags for the C compiler.
-                cFlags ""
-                // Sets a flag to enable format macro constants for the C++ compiler.
-                cppFlags ""
-                //指定需要编译的cpu架构
-                abiFilters "armeabi"
-                //这里指定只编译 native-lib 模块
-                targets "native-debug"
-            }
+        multiDexEnabled true
+        aaptOptions {
+            cruncherEnabled true
+            useNewCruncher false
         }
+//        externalNativeBuild {
+//            cmake {
+//                // Sets optional flags for the C compiler.
+//                cFlags ""
+//                // Sets a flag to enable format macro constants for the C++ compiler.
+//                cppFlags ""
+//                //指定需要编译的cpu架构
+//                abiFilters "armeabi"
+//                //这里指定只编译 native-lib 模块
+//                targets "native-debug"
+//            }
+//        }
     }
     signingConfigs {
         base {
@@ -66,20 +71,16 @@ android {
             jniDebuggable true
             minifyEnabled false
             shrinkResources false
-            multiDexEnabled false
             // 开启ZipAlign优化
             zipAlignEnabled false
-            aaptOptions {
-                cruncherEnabled false
-            }
-            externalNativeBuild {
-                cmake {
-                    // Sets optional flags for the C compiler.
-                    cFlags "-DDebug"
-                    // Sets a flag to enable format macro constants for the C++ compiler.
-                    cppFlags "-DDebug"
-                }
-            }
+//            externalNativeBuild {
+//                cmake {
+//                    // Sets optional flags for the C compiler.
+//                    cFlags "-DDebug"
+//                    // Sets a flag to enable format macro constants for the C++ compiler.
+//                    cppFlags "-DDebug"
+//                }
+//            }
             resValue "string", "app_name", "安卓笔记-测试版"
             manifestPlaceholders = [ROOT_PATH: "\"${ROOT_PATH}\""]
             buildConfigField "String", "ROOT_PATH", "\"${ROOT_PATH}\""
@@ -91,21 +92,17 @@ android {
             jniDebuggable false
             minifyEnabled true
             shrinkResources true
-            multiDexEnabled true
             // 开启ZipAlign优化
             zipAlignEnabled true
             signingConfig signingConfigs.base
-            aaptOptions {
-                cruncherEnabled true
-            }
-            externalNativeBuild {
-                cmake {
-                    // Sets optional flags for the C compiler.
-                    cFlags "-DDebug"
-                    // Sets a flag to enable format macro constants for the C++ compiler.
-                    cppFlags "-DDebug"
-                }
-            }
+//            externalNativeBuild {
+//                cmake {
+//                    // Sets optional flags for the C compiler.
+//                    cFlags "-DDebug"
+//                    // Sets a flag to enable format macro constants for the C++ compiler.
+//                    cppFlags "-DDebug"
+//                }
+//            }
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [ROOT_PATH: "\"${ROOT_PATH}\""]
             resValue "string", "app_name", "安卓笔记"
@@ -172,18 +169,17 @@ android {
 //        release.setRoot('build-types/release')
     }
 
-
-    externalNativeBuild {
-        cmake {
-            path "CMakeLists.txt"
-        }
-    }
+//    externalNativeBuild {
+//        cmake {
+//            path "CMakeLists.txt"
+//        }
+//    }
 
 
     applicationVariants.all { variant ->
 
         if (variant.getName().contains("Debug")) {
-            buildConfigField "String", "AD_APP_ID", "\"2882303761517411490\""
+            buildConfigField "String", "AD_APP_ID", "\"2882303761517411490\""//2882303761517411490
         } else {
             buildConfigField "String", "AD_APP_ID", "\"2882303761518009814\""
         }
@@ -222,7 +218,7 @@ android {
     }
     //临时禁用严格图片检查
 //    aaptOptions.cruncherEnabled = false
-    aaptOptions.useNewCruncher = false
+    //aaptOptions.useNewCruncher = false
 }
 
 dependencies {
@@ -281,5 +277,6 @@ dependencies {
     implementation 'com.hyman:flowlayout-lib:1.1.2'
 
     implementation 'de.hdodenhof:circleimageview:3.0.0'
-
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    implementation 'com.android.support:multidex:1.0.2'
 }

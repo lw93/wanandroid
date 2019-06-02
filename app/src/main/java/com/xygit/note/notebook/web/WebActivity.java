@@ -5,16 +5,23 @@ import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.lzyzsd.jsbridge.BridgeWebView;
+import com.miui.zeus.mimo.sdk.ad.AdWorkerFactory;
+import com.miui.zeus.mimo.sdk.ad.FloatAd;
+import com.miui.zeus.mimo.sdk.ad.IAdWorker;
+import com.xiaomi.ad.common.pojo.AdType;
 import com.xygit.note.notebook.R;
+import com.xygit.note.notebook.adv.MiAdvType;
 import com.xygit.note.notebook.api.CommResponse;
 import com.xygit.note.notebook.api.vo.CommonData;
 import com.xygit.note.notebook.base.BaseActivity;
@@ -34,6 +41,7 @@ public class WebActivity extends BaseActivity {
     private TextView tvTitle;
     private ProgressBar progressBar;
     private CommonData commonData;
+    private IAdWorker advFloat;
 
     @Override
     public int layoutId() {
@@ -46,7 +54,19 @@ public class WebActivity extends BaseActivity {
         tvTitle = findViewById(R.id.tv_title);
         bvActivityWeb = findViewById(R.id.bv_activity_web);
         progressBar = findViewById(R.id.progressBar_web);
+        initAdv();
     }
+
+    private void initAdv() {
+        try {
+            advFloat = AdWorkerFactory.getAdWorker(this, (ViewGroup) getWindow().getDecorView(), this, AdType.AD_FLOAT_AD);
+            advFloat.loadAndShow(MiAdvType.floatingBallAdvertising.getAdvId());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        FloatAd.setGravity(Gravity.CENTER | Gravity.BOTTOM);
+    }
+
 
     @Override
     public void initAction() {
@@ -122,6 +142,13 @@ public class WebActivity extends BaseActivity {
         bvActivityWeb.clearSslPreferences();
         bvActivityWeb.destroyDrawingCache();
         bvActivityWeb.destroy();
+        try {
+            if (null != advFloat) {
+                advFloat.recycle();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 
@@ -211,6 +238,11 @@ public class WebActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && bvActivityWeb.canGoBack()) {
+            if (bvActivityWeb.getTitle().contains("对不起") && (bvActivityWeb.getUrl().contains("404")
+                    || bvActivityWeb.getUrl().contains("hint") || bvActivityWeb.getUrl().contains("net_error"))) {
+                finish();
+                return true;
+            }
             bvActivityWeb.goBack();//返回上个页面
             return true;
         }

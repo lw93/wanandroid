@@ -11,4 +11,10 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY" />
 
+    <FrameLayout
+        android:id="@+id/container_splash"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </android.support.constraint.ConstraintLayout>
