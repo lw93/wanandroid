@@ -71,6 +71,7 @@ android {
             jniDebuggable true
             minifyEnabled false
             shrinkResources false
+            multiDexEnabled true
             // 开启ZipAlign优化
             zipAlignEnabled false
 //            externalNativeBuild {
@@ -92,6 +93,7 @@ android {
             jniDebuggable false
             minifyEnabled true
             shrinkResources true
+            multiDexEnabled true
             // 开启ZipAlign优化
             zipAlignEnabled true
             signingConfig signingConfigs.base

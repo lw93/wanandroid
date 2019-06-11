@@ -3,6 +3,7 @@ package com.xygit.note.notebook.main.fragment;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -71,6 +72,7 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
     private BasePage<CommonData> articles;
     private int currentPage = 0;
     private HomeArticleAdapter articleAdapter;
+    private FloatingActionButton btnArrowUp;
 //    private CommonData collectItem;
 
     private AdapterDataObserver articleObserver = new RecyclerView.AdapterDataObserver() {
@@ -155,6 +157,7 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
         bannerFragmentRecommend = rootView.findViewById(R.id.banner_fragment_recommend);
         refreshFragmentRecommend = rootView.findViewById(R.id.refresh_fragment_recommend);
         rvFragmentRecommend = rootView.findViewById(R.id.rv_fragment_recommend);
+        btnArrowUp = rootView.findViewById(R.id.fb_arrow_up);
         emptyLayout = rootView.findViewById(R.id.cl_container_layout_empty);
         emptyLayout.setVisibility(View.GONE);
         rvFragmentRecommend.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -164,6 +167,7 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
     @Override
     public void initAction() {
         emptyLayout.setOnClickListener(this);
+        btnArrowUp.setOnClickListener(this);
         bannerFragmentRecommend.setOnBannerListener(this);
         refreshFragmentRecommend.setRefreshHeader(new ClassicsHeader(bannerFragmentRecommend.getContext()));
         refreshFragmentRecommend.setOnRefreshListener(this);
@@ -414,6 +418,10 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
         if (id == R.id.cl_container_layout_empty) {
             emptyLayout.setVisibility(View.GONE);
             refreshFragmentRecommend.autoRefresh();
+        } else if (id == R.id.fb_arrow_up) {
+            if (articleAdapter != null && articleAdapter.getItemCount() > 0) {
+                rvFragmentRecommend.smoothScrollToPosition(0);
+            }
         }
     }
 

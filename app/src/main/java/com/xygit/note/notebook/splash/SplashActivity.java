@@ -47,7 +47,7 @@ public class SplashActivity extends BaseActivity implements Runnable {
     @Override
     public void initAction() {
         if (!BuildConfig.DEBUG && !JniHelper.debuggable(SplashActivity.this)) {
-            BuglyUtil.logWarn(TAG, "jni-> 程序被修改为可调试状态！！！");
+            BuglyUtil.logWarn(TAG, "C++ -> 程序被修改为可调试状态！！！");
             android.os.Process.killProcess(android.os.Process.myPid());
         }
         // 如果api >= 23 需要显式申请权限
@@ -74,7 +74,6 @@ public class SplashActivity extends BaseActivity implements Runnable {
                 public void onAdPresent() {
                     // 开屏广告展示
                     Log.d(TAG, "onAdPresent");
-                    splashContainer.setVisibility(View.VISIBLE);
                 }
 
                 @Override
@@ -93,6 +92,7 @@ public class SplashActivity extends BaseActivity implements Runnable {
                 @Override
                 public void onAdFailed(String s) {
                     Log.e(TAG, "onAdFailed : " + s);
+                    splashContainer.setVisibility(View.GONE);
                     ivSplash.postDelayed(SplashActivity.this, 3 * 1000);
                 }
 
