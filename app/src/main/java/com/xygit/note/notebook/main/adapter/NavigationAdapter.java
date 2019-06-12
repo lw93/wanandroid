@@ -129,7 +129,7 @@ public class NavigationAdapter extends BaseRecyclerAdapter<Navigation, BaseRecyc
                 public void onStimulateSuccess() {
                 }
             }, AdType.AD_STANDARD_NEWSFEED);
-            advInfoList.load(MiAdvType.informationFlowSmallMap.getAdvId(), 7);
+            advInfoList.load(MiAdvType.informationFlowSmallMap.getAdvId(), 10);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -50,7 +50,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         sparseArray.append(2, new SeniorFragment());
         vpContainerFragmentHome.setAdapter(new HomePagerAdapter(getChildFragmentManager(), sparseArray));
         tbTabFragmentHome.setupWithViewPager(vpContainerFragmentHome);
-        vpContainerFragmentHome.setOffscreenPageLimit(2);
+        vpContainerFragmentHome.setOffscreenPageLimit(1);
     }
 
     @Override

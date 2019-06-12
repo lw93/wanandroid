@@ -1,16 +1,23 @@
 package com.xygit.note.notebook.main.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.miui.zeus.mimo.sdk.ad.AdWorkerFactory;
+import com.miui.zeus.mimo.sdk.ad.IAdWorker;
+import com.miui.zeus.mimo.sdk.listener.MimoAdListener;
+import com.xiaomi.ad.common.pojo.AdType;
 import com.xygit.note.notebook.R;
 import com.xygit.note.notebook.adapter.BaseRecyclerAdapter;
 import com.xygit.note.notebook.adapter.BaseRecyclerHolder;
+import com.xygit.note.notebook.adv.MiAdvType;
 import com.xygit.note.notebook.api.vo.CommonData;
 
 import java.util.List;
@@ -23,6 +30,9 @@ import java.util.List;
 public class HomeArticleAdapter extends BaseRecyclerAdapter<CommonData, BaseRecyclerHolder> {
 
     private OnCheckedChangeListener onCheckedChangeListener;
+    private IAdWorker advInfoList;
+    private int mAdSize;
+    private int showedAdSize;
 
     public void setOnCheckedChangeListener(OnCheckedChangeListener onCheckedChangeListener) {
         this.onCheckedChangeListener = onCheckedChangeListener;
@@ -34,6 +44,59 @@ public class HomeArticleAdapter extends BaseRecyclerAdapter<CommonData, BaseRecy
 
     public HomeArticleAdapter(int layoutResId, @Nullable List<CommonData> data, RecyclerView adapterView) {
         super(layoutResId, data, adapterView);
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        initAdv(recyclerView);
+    }
+
+
+    private void initAdv(RecyclerView adapterView) {
+        try {
+            advInfoList = AdWorkerFactory.getAdWorker(adapterView.getContext(), null, new MimoAdListener() {
+                @Override
+                public void onAdPresent() {
+                }
+
+                @Override
+                public void onAdClick() {
+                }
+
+                @Override
+                public void onAdDismissed() {
+                }
+
+                @Override
+                public void onAdFailed(String s) {
+                }
+
+                @Override
+                public void onAdLoaded(int i) {
+                    mAdSize = i;
+                }
+
+                @Override
+                public void onStimulateSuccess() {
+                }
+            }, AdType.AD_STANDARD_NEWSFEED);
+            advInfoList.load(MiAdvType.informationFlowSmallMap.getAdvId(), 10);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        try {
+            if (advInfoList != null) {
+                advInfoList.recycle();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -91,6 +154,24 @@ public class HomeArticleAdapter extends BaseRecyclerAdapter<CommonData, BaseRecy
                 }
             }
         });
+        if (position != 0 && position % 5 == 0) {
+            holder.setGone(R.id.fl_ad_info, true);
+            ViewGroup container = holder.getView(R.id.fl_ad_info);
+            if (mAdSize > 0) {
+                try {
+                    container.addView(advInfoList.updateAdView(null, showedAdSize));
+                    showedAdSize++;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    holder.setGone(R.id.fl_ad_info, false);
+                }
+            } else {
+                holder.setGone(R.id.fl_ad_info, false);
+            }
+        } else {
+            if (position == 0) showedAdSize = 0;
+            holder.setGone(R.id.fl_ad_info, false);
+        }
     }
 
     public interface OnCheckedChangeListener {

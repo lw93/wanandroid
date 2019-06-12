@@ -96,7 +96,6 @@ android {
             multiDexEnabled true
             // 开启ZipAlign优化
             zipAlignEnabled true
-            signingConfig signingConfigs.base
 //            externalNativeBuild {
 //                cmake {
 //                    // Sets optional flags for the C compiler.
@@ -126,7 +125,7 @@ android {
                     HOTFIX_APPSECRET  : HOTFIX_APPSECRET,
                     HOTFIX_RSASECRET  : HOTFIX_RSASECRET
             ]
-            signingConfig signingConfigs.special
+//            signingConfig signingConfigs.special
         }
         xiaomi {
             applicationId "com.xy.personal.notebook"
@@ -139,7 +138,7 @@ android {
                     HOTFIX_APPSECRET  : HOTFIX_APPSECRET,
                     HOTFIX_RSASECRET  : HOTFIX_RSASECRET
             ]
-            signingConfig signingConfigs.special
+//            signingConfig signingConfigs.special
         }
     }
 

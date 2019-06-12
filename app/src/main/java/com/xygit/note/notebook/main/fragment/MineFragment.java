@@ -164,7 +164,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
             try {
                 advBanner.recycle();
             } catch (Exception ex) {
-
+                ex.printStackTrace();
             }
         }
         EventBus.getDefault().unregister(this);

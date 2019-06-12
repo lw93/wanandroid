@@ -64,6 +64,8 @@ public class SplashActivity extends BaseActivity implements Runnable {
                             ToastUtil.showToast("友情提示：未授权可能会导致无法使用");
                         }
                     });
+        } else {
+            initAdv();
         }
     }
 
@@ -99,6 +101,7 @@ public class SplashActivity extends BaseActivity implements Runnable {
                 @Override
                 public void onAdLoaded(int size) {
                     //do nothing
+                    splashContainer.setVisibility(View.VISIBLE);
                 }
 
                 @Override

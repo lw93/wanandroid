@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         fragmentSparse.append(3, new MineFragment());
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragmentSparse);
         vpReplaceActivityMain.setAdapter(viewPagerAdapter);
-        vpReplaceActivityMain.setOffscreenPageLimit(4);
+        vpReplaceActivityMain.setOffscreenPageLimit(1);
         btNavigationActivityMain.setSelectedItemId(R.id.tab_home);
     }
 
