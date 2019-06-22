@@ -187,7 +187,9 @@
 -keep class **.*Model*.** {*;}
 -keep class **.*Bean*.** {*;}
 -keep class **.*Entity*.** {*;}
-
+-keep class **.*vo*.** {*;}
+-keep class **.*bean*.** {*;}
+-keep class **.*entity*.** {*;}
 #----------------常用的第三方类库的混淆------------------------------------
 #eventbus
 -keepclassmembers class ** {
@@ -313,11 +315,23 @@ public static java.lang.String TABLENAME;
 # banner 的混淆代码
 -keep class com.youth.banner.** {
     *;
- }
- -keep class com.xiaomi.ad.** {
-     *;
- }
+}
+-keep class com.xiaomi.ad.** {
+    *;
+}
 
- -keep class com.miui.zeus.**{
-     *;
- }
+-keep class com.miui.zeus.**{
+    *;
+}
+-keep class com.xygit.note.notebook.base.AppConfiguration{
+    *;
+}
+-keep class com.xygit.note.notebook.view.BottomNavigationViewHelper{
+    *;
+}
+#-keepclassmembers class android.support.design.internal.BottomNavigationMenuView {
+#    boolean mShiftingMode;
+#}
+-keep public class android.support.design.** extends android.view.View{
+    *;
+}

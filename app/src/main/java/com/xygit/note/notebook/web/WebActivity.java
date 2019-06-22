@@ -22,7 +22,7 @@ import com.miui.zeus.mimo.sdk.ad.IAdWorker;
 import com.xiaomi.ad.common.pojo.AdType;
 import com.xygit.note.notebook.R;
 import com.xygit.note.notebook.adv.MiAdvType;
-import com.xygit.note.notebook.api.CommResponse;
+import com.xygit.note.notebook.api.vo.CommResponse;
 import com.xygit.note.notebook.api.vo.CommonData;
 import com.xygit.note.notebook.base.BaseActivity;
 import com.xygit.note.notebook.constant.NoteBookConst;

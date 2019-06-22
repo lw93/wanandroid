@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.xygit.note.notebook.R;
-import com.xygit.note.notebook.api.CommResponse;
+import com.xygit.note.notebook.api.vo.CommResponse;
 import com.xygit.note.notebook.api.vo.CommonData;
 import com.xygit.note.notebook.api.vo.LoginResult;
 import com.xygit.note.notebook.base.BaseActivity;

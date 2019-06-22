@@ -2,9 +2,10 @@ package com.xygit.note.notebook.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import com.google.gson.JsonParseException;
-import com.xygit.note.notebook.api.CommResponse;
+import com.xygit.note.notebook.api.vo.CommResponse;
 import com.xygit.note.notebook.constant.NoteBookConst;
 import com.xygit.note.notebook.constant.PreferencesConst;
 import com.xygit.note.notebook.login.LoginActivity;
@@ -82,7 +83,9 @@ public abstract class BaseSubscriber<T> extends Subscriber<CommResponse<T>> {
                 ActivityUtil.startActivity(context, intent);
                 return;
             } else if (NoteBookConst.RESPONSE_SUCCESS != tCommResponse.getErrorCode()) {
-                ToastUtil.showToast(tCommResponse.getErrorMsg());
+                if (!TextUtils.isEmpty(tCommResponse.getErrorMsg())) {
+                    ToastUtil.showToast(tCommResponse.getErrorMsg());
+                }
                 return;
             }
             onSucess(tCommResponse);

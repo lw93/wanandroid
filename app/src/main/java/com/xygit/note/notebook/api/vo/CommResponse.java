@@ -1,4 +1,4 @@
-package com.xygit.note.notebook.api;
+package com.xygit.note.notebook.api.vo;
 
 /**
  * 其中errorCode如果为负数则认为错误，此时errorMsg会包含错误信息。data为Object，返回数据根据不同的接口而变化。

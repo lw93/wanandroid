@@ -14,7 +14,7 @@ import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xygit.note.notebook.R;
-import com.xygit.note.notebook.api.CommResponse;
+import com.xygit.note.notebook.api.vo.CommResponse;
 import com.xygit.note.notebook.api.vo.Children;
 import com.xygit.note.notebook.base.BaseFragment;
 import com.xygit.note.notebook.constant.NoteBookConst;

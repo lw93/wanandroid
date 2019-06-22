@@ -14,14 +14,11 @@ import com.miui.zeus.mimo.sdk.ad.IAdWorker;
 import com.miui.zeus.mimo.sdk.listener.MimoAdListener;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xiaomi.ad.common.pojo.AdType;
-import com.xygit.note.notebook.BuildConfig;
 import com.xygit.note.notebook.R;
 import com.xygit.note.notebook.adv.MiAdvType;
 import com.xygit.note.notebook.base.BaseActivity;
-import com.xygit.note.notebook.jni.JniHelper;
 import com.xygit.note.notebook.main.MainActivity;
 import com.xygit.note.notebook.util.ActivityUtil;
-import com.xygit.note.notebook.util.BuglyUtil;
 import com.xygit.note.notebook.util.ToastUtil;
 
 import io.reactivex.functions.Consumer;
@@ -46,17 +43,13 @@ public class SplashActivity extends BaseActivity implements Runnable {
 
     @Override
     public void initAction() {
-        if (!BuildConfig.DEBUG && !JniHelper.debuggable(SplashActivity.this)) {
-            BuglyUtil.logWarn(TAG, "C++ -> 程序被修改为可调试状态！！！");
-            android.os.Process.killProcess(android.os.Process.myPid());
-        }
         // 如果api >= 23 需要显式申请权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             RxPermissions rxPermissions = new RxPermissions(this);
             rxPermissions.request(Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET)
                     .subscribe(new Consumer<Boolean>() {
                         @Override
-                        public void accept(Boolean aBoolean) throws Exception {
+                        public void accept(Boolean aBoolean) {
                             if (aBoolean) {
                                 initAdv();
                                 return;

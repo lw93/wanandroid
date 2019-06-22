@@ -2,7 +2,7 @@ package com.xygit.note.notebook.manager.net;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.xygit.note.notebook.BuildConfig;
-import com.xygit.note.notebook.api.CommResponse;
+import com.xygit.note.notebook.api.vo.CommResponse;
 import com.xygit.note.notebook.api.NoteBookUrl;
 import com.xygit.note.notebook.api.WanAndService;
 import com.xygit.note.notebook.api.vo.Banner;

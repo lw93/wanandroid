@@ -20,7 +20,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xygit.note.notebook.R;
 import com.xygit.note.notebook.adapter.BaseRecyclerAdapter;
-import com.xygit.note.notebook.api.CommResponse;
+import com.xygit.note.notebook.api.vo.CommResponse;
 import com.xygit.note.notebook.api.WanAndService;
 import com.xygit.note.notebook.api.vo.BasePage;
 import com.xygit.note.notebook.api.vo.CommonData;
@@ -114,7 +114,7 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
     };
 
     private void emptyLayout() {
-        if (articleAdapter.getItemCount() < 1) {
+        if (articleAdapter != null && articleAdapter.getItemCount() < 1) {
             emptyLayout.setVisibility(View.VISIBLE);
         } else {
             emptyLayout.setVisibility(View.GONE);

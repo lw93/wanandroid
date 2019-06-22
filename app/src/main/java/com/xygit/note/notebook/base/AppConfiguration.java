@@ -13,9 +13,6 @@ import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-import com.taobao.sophix.PatchStatus;
-import com.taobao.sophix.SophixManager;
-import com.taobao.sophix.listener.PatchLoadStatusListener;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.xygit.note.notebook.BuildConfig;
 import com.xygit.note.notebook.R;
@@ -65,12 +62,12 @@ public class AppConfiguration implements IThirdConfig, Thread.UncaughtExceptionH
 
     public AppConfiguration initAppConfiguration(Application application) {
         this.mApplication = application;
-        Stetho.initializeWithDefaults(application);
         MimoSdk.init(application, BuildConfig.AD_APP_ID, "fake_app_key", "fake_app_token");
         if (!BuildConfig.DEBUG) {
             Thread.setDefaultUncaughtExceptionHandler(this);
             SecurityUtil.apkVerify(mApplication);
         } else {
+            Stetho.initializeWithDefaults(application);
             MimoSdk.setDebugOn();
             MimoSdk.setStageOn();
         }
@@ -113,7 +110,7 @@ public class AppConfiguration implements IThirdConfig, Thread.UncaughtExceptionH
 
     @Override
     public void initHotfix() {
-        SophixManager.getInstance().setContext(mApplication)
+        /*SophixManager.getInstance().setContext(mApplication)
                 .setAppVersion(BuildConfig.VERSION_NAME)
                 .setAesKey(null)
                 .setEnableDebug(BuildConfig.DEBUG)
@@ -134,7 +131,7 @@ public class AppConfiguration implements IThirdConfig, Thread.UncaughtExceptionH
                         }
                     }
                 }).initialize();
-        SophixManager.getInstance().queryAndLoadNewPatch();
+        SophixManager.getInstance().queryAndLoadNewPatch();*/
     }
 
     @Override

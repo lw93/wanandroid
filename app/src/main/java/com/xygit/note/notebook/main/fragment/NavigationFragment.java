@@ -17,7 +17,7 @@ import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xygit.note.notebook.R;
-import com.xygit.note.notebook.api.CommResponse;
+import com.xygit.note.notebook.api.vo.CommResponse;
 import com.xygit.note.notebook.api.vo.CommonData;
 import com.xygit.note.notebook.api.vo.Navigation;
 import com.xygit.note.notebook.base.BaseFragment;
@@ -84,7 +84,7 @@ public class NavigationFragment extends BaseFragment implements View.OnClickList
     }
 
     private void emptyLayout() {
-        if (navigationAdapter.getItemCount() < 1) {
+        if (navigationAdapter != null && navigationAdapter.getItemCount() < 1) {
             emptyLayout.setVisibility(View.VISIBLE);
         } else {
             emptyLayout.setVisibility(View.GONE);
@@ -102,7 +102,7 @@ public class NavigationFragment extends BaseFragment implements View.OnClickList
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        HttpManager.getInstance().quryNavigationDatas(this,new CommSubscriber<List<Navigation>>(getActivity()) {
+        HttpManager.getInstance().quryNavigationDatas(this, new CommSubscriber<List<Navigation>>(getActivity()) {
             @Override
             protected void onSucess(CommResponse<List<Navigation>> listCommResponse) {
                 if (listCommResponse != null) {

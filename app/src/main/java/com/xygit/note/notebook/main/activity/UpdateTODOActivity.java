@@ -15,7 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.xygit.note.notebook.R;
-import com.xygit.note.notebook.api.CommResponse;
+import com.xygit.note.notebook.api.vo.CommResponse;
 import com.xygit.note.notebook.api.vo.TodoDesc;
 import com.xygit.note.notebook.base.BaseActivity;
 import com.xygit.note.notebook.constant.NoteBookConst;

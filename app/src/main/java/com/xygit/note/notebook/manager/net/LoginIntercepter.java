@@ -2,7 +2,7 @@ package com.xygit.note.notebook.manager.net;
 
 import android.support.annotation.NonNull;
 
-import com.xygit.note.notebook.api.CommResponse;
+import com.xygit.note.notebook.api.vo.CommResponse;
 import com.xygit.note.notebook.api.NoteBookUrl;
 import com.xygit.note.notebook.constant.NoteBookConst;
 import com.xygit.note.notebook.constant.PreferencesConst;

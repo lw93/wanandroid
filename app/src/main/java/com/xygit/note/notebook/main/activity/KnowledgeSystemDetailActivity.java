@@ -23,7 +23,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xygit.note.notebook.R;
 import com.xygit.note.notebook.adapter.BaseRecyclerAdapter;
-import com.xygit.note.notebook.api.CommResponse;
+import com.xygit.note.notebook.api.vo.CommResponse;
 import com.xygit.note.notebook.api.vo.BasePage;
 import com.xygit.note.notebook.api.vo.Children;
 import com.xygit.note.notebook.api.vo.CommonData;
@@ -165,7 +165,7 @@ public class KnowledgeSystemDetailActivity extends BaseActivity implements View.
 
     private void queryData() {
         if (children == null) return;
-        HttpManager.getInstance().quryKnowledgeTreeDatas(this,String.valueOf(currentPage), String.valueOf(children.getId()), new CommSubscriber<BasePage<CommonData>>(this) {
+        HttpManager.getInstance().quryKnowledgeTreeDatas(this, String.valueOf(currentPage), String.valueOf(children.getId()), new CommSubscriber<BasePage<CommonData>>(this) {
             @Override
             protected void onSucess(CommResponse<BasePage<CommonData>> basePageCommResponse) {
                 if (null != basePageCommResponse) {
@@ -188,7 +188,7 @@ public class KnowledgeSystemDetailActivity extends BaseActivity implements View.
     }
 
     private void emptyLayout() {
-        if (articleAdapter.getItemCount() < 1) {
+        if (articleAdapter != null && articleAdapter.getItemCount() < 1) {
             emptyLayout.setVisibility(View.VISIBLE);
         } else {
             emptyLayout.setVisibility(View.GONE);
@@ -214,7 +214,7 @@ public class KnowledgeSystemDetailActivity extends BaseActivity implements View.
         intent.putExtra(NoteBookConst.INETENT_START_TYPE, KnowledgeSystemDetailActivity.START_FROM_KNOWLEDGE_SYSTEM);
         intent.putExtra(NoteBookConst.INETENT_PARAM_DATA, item);
         if (!item.isCollect()) {
-            HttpManager.getInstance().collectInnerArticle(this,String.valueOf(item.getId()), new CommSubscriber<Object>(this, intent) {
+            HttpManager.getInstance().collectInnerArticle(this, String.valueOf(item.getId()), new CommSubscriber<Object>(this, intent) {
 
                 @Override
                 protected void onSucess(CommResponse<Object> objectCommResponse) {
@@ -226,7 +226,7 @@ public class KnowledgeSystemDetailActivity extends BaseActivity implements View.
             });
             return;
         }
-        HttpManager.getInstance().cancelCollectArticle(this,String.valueOf(item.getId()), new CommSubscriber<Object>(this, intent) {
+        HttpManager.getInstance().cancelCollectArticle(this, String.valueOf(item.getId()), new CommSubscriber<Object>(this, intent) {
 
             @Override
             protected void onSucess(CommResponse<Object> objectCommResponse) {

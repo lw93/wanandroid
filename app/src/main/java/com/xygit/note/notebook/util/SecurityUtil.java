@@ -7,6 +7,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -32,7 +33,7 @@ public class SecurityUtil {
     private static final int TEST = 495210525;
 
     public static void apkVerify(Application app) {
-        if (0 != (app.getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) || isRunningInEmualtor() || TEST != getSignature(app)) {
+        if (0 != (app.getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) || isRunningInEmualtor()) {
             BuglyUtil.logWarn(TAG, "程序被修改为可调试状态！！！");
             android.os.Process.killProcess(android.os.Process.myPid());
         }
@@ -76,6 +77,7 @@ public class SecurityUtil {
                     PackageManager.GET_SIGNATURES);
             Signature[] signs = packageInfo.signatures;
             Signature sign = signs[0];
+            Log.i(TAG, sign.hashCode() + "");
             return sign.hashCode();
         } catch (Exception e) {
             e.printStackTrace();

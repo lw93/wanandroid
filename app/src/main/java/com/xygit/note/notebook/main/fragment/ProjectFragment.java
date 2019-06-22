@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.xygit.note.notebook.R;
-import com.xygit.note.notebook.api.CommResponse;
+import com.xygit.note.notebook.api.vo.CommResponse;
 import com.xygit.note.notebook.api.vo.Children;
 import com.xygit.note.notebook.base.BaseFragment;
 import com.xygit.note.notebook.main.adapter.ProjectPagerAdapter;

@@ -23,7 +23,7 @@ import com.xiaomi.ad.common.pojo.AdType;
 import com.xygit.note.notebook.R;
 import com.xygit.note.notebook.adapter.BaseRecyclerAdapter;
 import com.xygit.note.notebook.adv.MiAdvType;
-import com.xygit.note.notebook.api.CommResponse;
+import com.xygit.note.notebook.api.vo.CommResponse;
 import com.xygit.note.notebook.api.vo.LoginResult;
 import com.xygit.note.notebook.base.BaseApplication;
 import com.xygit.note.notebook.base.BaseFragment;
