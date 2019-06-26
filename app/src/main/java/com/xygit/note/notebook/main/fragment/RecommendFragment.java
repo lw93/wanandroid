@@ -1,6 +1,7 @@
 package com.xygit.note.notebook.main.fragment;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -18,33 +19,33 @@ import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.scwang.smartrefresh.layout.util.DensityUtil;
 import com.xygit.note.notebook.R;
 import com.xygit.note.notebook.adapter.BaseRecyclerAdapter;
-import com.xygit.note.notebook.api.vo.CommResponse;
 import com.xygit.note.notebook.api.WanAndService;
 import com.xygit.note.notebook.api.vo.BasePage;
+import com.xygit.note.notebook.api.vo.CommResponse;
 import com.xygit.note.notebook.api.vo.CommonData;
 import com.xygit.note.notebook.base.BaseFragment;
 import com.xygit.note.notebook.constant.NoteBookConst;
 import com.xygit.note.notebook.login.LoginActivity;
 import com.xygit.note.notebook.main.activity.CollectionActivity;
 import com.xygit.note.notebook.main.adapter.HomeArticleAdapter;
+import com.xygit.note.notebook.main.adapter.HomeBannerAdapter;
 import com.xygit.note.notebook.manager.evenbus.CollectAction;
 import com.xygit.note.notebook.manager.evenbus.LoginAction;
-import com.xygit.note.notebook.manager.glide.GlideImageLoder;
 import com.xygit.note.notebook.manager.net.HttpCallBack;
 import com.xygit.note.notebook.manager.net.HttpManager;
 import com.xygit.note.notebook.manager.subscriber.CommSubscriber;
 import com.xygit.note.notebook.util.ActivityUtil;
+import com.xygit.note.notebook.view.FocusLayoutManager;
 import com.xygit.note.notebook.web.WebActivity;
 import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -62,17 +63,21 @@ import rx.schedulers.Schedulers;
  */
 
 public class RecommendFragment extends BaseFragment implements OnBannerListener, OnRefreshListener, OnLoadMoreListener,
-        HttpCallBack, HomeArticleAdapter.OnCheckedChangeListener, View.OnClickListener, BaseRecyclerAdapter.OnItemClickListener {
+        HttpCallBack, HomeArticleAdapter.OnCheckedChangeListener, View.OnClickListener, BaseRecyclerAdapter.OnItemClickListener, HomeBannerAdapter.OnBannerItemClickListener {
     private Banner bannerFragmentRecommend;
-    private RecyclerView rvFragmentRecommend;
+    private RecyclerView rvFragmentRecommend, rvBannerFragmentRecommend;
     private SmartRefreshLayout refreshFragmentRecommend;
     private View emptyLayout;
     private List<com.xygit.note.notebook.api.vo.Banner> noteBookBanner;
-    private List<String> bannerUrls, bannerTitles;
+    //private List<String> bannerUrls, bannerTitles;
     private BasePage<CommonData> articles;
     private int currentPage = 0;
     private HomeArticleAdapter articleAdapter;
     private FloatingActionButton btnArrowUp;
+    private FocusLayoutManager focusLayoutManager;
+    private HomeBannerAdapter bannerAdapter;
+    private int scrollToPosition = 1000;
+    private Handler handler = new Handler();
 //    private CommonData collectItem;
 
     private AdapterDataObserver articleObserver = new RecyclerView.AdapterDataObserver() {
@@ -126,7 +131,7 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
             return;
         }
         if (null != noteBookBanner) {
-            int size = noteBookBanner.size();
+            /*int size = noteBookBanner.size();
             bannerUrls.clear();
             bannerUrls = new ArrayList<>();
             bannerTitles.clear();
@@ -138,7 +143,8 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
                     bannerTitles.add(banner.getTitle());
                 }
             }
-            bannerFragmentRecommend.update(bannerUrls, bannerTitles);
+            bannerFragmentRecommend.update(bannerUrls, bannerTitles);*/
+            bannerAdapter.setList(noteBookBanner);
         }
         if (null != articles) {
             List<CommonData> data = articles.getDatas();
@@ -155,11 +161,23 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
     @Override
     public void initView() {
         bannerFragmentRecommend = rootView.findViewById(R.id.banner_fragment_recommend);
+        rvBannerFragmentRecommend = rootView.findViewById(R.id.rv_banner_fragment_recommend);
         refreshFragmentRecommend = rootView.findViewById(R.id.refresh_fragment_recommend);
         rvFragmentRecommend = rootView.findViewById(R.id.rv_fragment_recommend);
         btnArrowUp = rootView.findViewById(R.id.fb_arrow_up);
         emptyLayout = rootView.findViewById(R.id.cl_container_layout_empty);
         emptyLayout.setVisibility(View.GONE);
+        focusLayoutManager =
+                new FocusLayoutManager.Builder()
+                        .layerPadding(DensityUtil.dp2px(14))
+                        .normalViewGap(DensityUtil.dp2px(14))
+                        .focusOrientation(FocusLayoutManager.FOCUS_LEFT)
+                        .isAutoSelect(true)
+                        .maxLayerCount(3)
+                        .build();
+        rvBannerFragmentRecommend.setLayoutManager(focusLayoutManager);
+        bannerAdapter = new HomeBannerAdapter(null, rvBannerFragmentRecommend);
+        rvBannerFragmentRecommend.setAdapter(bannerAdapter);
         rvFragmentRecommend.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvFragmentRecommend.addItemDecoration(new DividerItemDecoration(rvFragmentRecommend.getContext(), LinearLayout.VERTICAL));
     }
@@ -168,6 +186,7 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
     public void initAction() {
         emptyLayout.setOnClickListener(this);
         btnArrowUp.setOnClickListener(this);
+        bannerAdapter.setOnItemClickListener(this);
         bannerFragmentRecommend.setOnBannerListener(this);
         refreshFragmentRecommend.setRefreshHeader(new ClassicsHeader(bannerFragmentRecommend.getContext()));
         refreshFragmentRecommend.setOnRefreshListener(this);
@@ -183,12 +202,12 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
         articleAdapter.setOnCheckedChangeListener(this);
         articleAdapter.registerAdapterDataObserver(articleObserver);
         articleAdapter.setOnItemClickListener(this);
-        bannerUrls = new ArrayList<>(7);
+        /*bannerUrls = new ArrayList<>(7);
         bannerTitles = new ArrayList<>(7);
         bannerFragmentRecommend.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
                 .setIndicatorGravity(BannerConfig.RIGHT).setImages(bannerUrls)
                 .setBannerTitles(bannerTitles).setImageLoader(new GlideImageLoder())
-                .start();
+                .start();*/
         rvFragmentRecommend.setAdapter(articleAdapter);
         refreshFragmentRecommend.autoRefresh();
 //        SpruceManager.getInstance().build(clContainerFragmentRecommend);
@@ -201,29 +220,46 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
             noteBookBanner.clear();
             noteBookBanner = null;
         }
-        if (bannerUrls != null) {
+        /*if (bannerUrls != null) {
             bannerUrls.clear();
             bannerUrls = null;
         }
         if (bannerTitles != null) {
             bannerTitles.clear();
             bannerTitles = null;
-        }
+        }*/
         if (articles != null) {
             articles = null;
+        }
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+            handler = null;
         }
         if (articleAdapter != null) {
             articleAdapter.clear();
             articleAdapter = null;
         }
+        if (bannerAdapter != null) {
+            bannerAdapter.clear();
+            bannerAdapter = null;
+        }
         EventBus.getDefault().unregister(this);
     }
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            focusLayoutManager.scrollToPosition(scrollToPosition++);
+            handler.postDelayed(this, 5000L);
+        }
+    };
 
     @Override
     public void onStart() {
         super.onStart();
         //开始轮播
         bannerFragmentRecommend.startAutoPlay();
+        handler.postDelayed(runnable, 3000L);
     }
 
     @Override
@@ -236,6 +272,7 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
         super.onStop();
         //开始轮播
         bannerFragmentRecommend.stopAutoPlay();
+        handler.removeCallbacks(runnable);
     }
 
     @Override
@@ -464,5 +501,16 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
     @Subscribe
     public void loginAction(LoginAction loginAction) {
         refreshFragmentRecommend.autoRefresh();
+    }
+
+    @Override
+    public void onBannerItemClick(RecyclerView.Adapter adapter, View view, int position) {
+        if (bannerAdapter != null && bannerAdapter.getItemCount() > 0) {
+            int realPosition = position % bannerAdapter.getList().size();
+            com.xygit.note.notebook.api.vo.Banner item = noteBookBanner.get(realPosition);
+            Intent intent = new Intent(getActivity(), WebActivity.class);
+            intent.putExtra(NoteBookConst.INETENT_PARAM_URL, item.getUrl());
+            ActivityUtil.startActivity(getActivity(), intent);
+        }
     }
 }
