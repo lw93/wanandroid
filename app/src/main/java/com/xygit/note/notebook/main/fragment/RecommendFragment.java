@@ -165,6 +165,7 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
         refreshFragmentRecommend = rootView.findViewById(R.id.refresh_fragment_recommend);
         rvFragmentRecommend = rootView.findViewById(R.id.rv_fragment_recommend);
         btnArrowUp = rootView.findViewById(R.id.fb_arrow_up);
+        btnArrowUp.setVisibility(View.GONE);
         emptyLayout = rootView.findViewById(R.id.cl_container_layout_empty);
         emptyLayout.setVisibility(View.GONE);
         focusLayoutManager =
@@ -180,6 +181,27 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
         rvBannerFragmentRecommend.setAdapter(bannerAdapter);
         rvFragmentRecommend.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvFragmentRecommend.addItemDecoration(new DividerItemDecoration(rvFragmentRecommend.getContext(), LinearLayout.VERTICAL));
+
+        rvFragmentRecommend.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int scollY = getScollYDistance();
+                if (dy > 0 && scollY > 200) {
+                    btnArrowUp.setVisibility(View.VISIBLE);
+                } else if (scollY < 300) {
+                    btnArrowUp.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
+    public int getScollYDistance() {
+        LinearLayoutManager layoutManager = (LinearLayoutManager) rvFragmentRecommend.getLayoutManager();
+        int position = layoutManager.findFirstVisibleItemPosition();
+        View firstVisiableChildView = layoutManager.findViewByPosition(position);
+        int itemHeight = firstVisiableChildView.getHeight();
+        return (position) * itemHeight - firstVisiableChildView.getTop();
     }
 
     @Override
