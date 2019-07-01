@@ -10,4 +10,5 @@
     <color name="colorPrimaryCustomDark">#76ea17</color>
     <color name="transparent_80">#80000000</color>
     <color name="tab_title_color">#D9D9D9</color>
+    <color name="color_grey_light">#6ECECECE</color>
 </resources>

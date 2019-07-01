@@ -78,6 +78,7 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
     private HomeBannerAdapter bannerAdapter;
     private int scrollToPosition = 1000;
     private Handler handler = new Handler();
+    private static final long DELAY_TIME = 5000L;
 //    private CommonData collectItem;
 
     private AdapterDataObserver articleObserver = new RecyclerView.AdapterDataObserver() {
@@ -271,8 +272,9 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            focusLayoutManager.scrollToPosition(scrollToPosition++);
-            handler.postDelayed(this, 5000L);
+            scrollToPosition++;
+            focusLayoutManager.scrollToPosition(scrollToPosition);
+            handler.postDelayed(this, DELAY_TIME);
         }
     };
 
@@ -281,7 +283,8 @@ public class RecommendFragment extends BaseFragment implements OnBannerListener,
         super.onStart();
         //开始轮播
         bannerFragmentRecommend.startAutoPlay();
-        handler.postDelayed(runnable, 3000L);
+        handler.removeCallbacks(runnable);
+        handler.postDelayed(runnable, DELAY_TIME);
     }
 
     @Override

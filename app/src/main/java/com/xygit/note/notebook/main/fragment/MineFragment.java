@@ -90,7 +90,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
     private void initBanner() {
         try {
-            advBanner = AdWorkerFactory.getAdWorker(getActivity(), containerMine, new MimoAdListener() {
+            advBanner = AdWorkerFactory.getAdWorker(getActivity(), null, new MimoAdListener() {
                 @Override
                 public void onAdPresent() {
 
@@ -113,7 +113,14 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
                 @Override
                 public void onAdLoaded(int i) {
-
+                    if (i >= 1) {
+                        containerMine.removeAllViews();
+                        try {
+                            containerMine.addView(advBanner.updateAdView(null, 0));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
 
                 @Override
@@ -121,7 +128,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
                 }
             }, AdType.AD_BANNER);
-            advBanner.loadAndShow(MiAdvType.banner.getAdvId());
+            advBanner.load(MiAdvType.incentiveAdvertising.getAdvId());
         } catch (Exception ex) {
             ex.printStackTrace();
         }

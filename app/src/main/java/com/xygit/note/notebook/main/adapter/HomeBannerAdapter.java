@@ -57,7 +57,8 @@ public class HomeBannerAdapter extends RecyclerView.Adapter<BaseRecyclerHolder> 
                 .load(item.getImagePath())
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .error(R.drawable.ic_holder_empty)
+                .error(R.drawable.ic_holder_full_empty)
+                .placeholder(R.drawable.ic_holder_full_empty)
                 .into(imageView);
         TextView titleView = holder.getView(R.id.tv_banner_item);
         String title = item.getTitle();
