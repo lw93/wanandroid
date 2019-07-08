@@ -41,7 +41,7 @@ public abstract class BaseFragment extends Fragment {
         initData();
         return rootView;
     }
-    
+
     @Override
     public void onDestroy() {
         clearData();
