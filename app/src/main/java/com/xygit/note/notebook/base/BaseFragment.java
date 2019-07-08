@@ -41,12 +41,12 @@ public abstract class BaseFragment extends Fragment {
         initData();
         return rootView;
     }
-
+    
     @Override
-    public void onDetach() {
+    public void onDestroy() {
         clearData();
         SpruceManager.getInstance().release();
         HttpManager.getInstance().clearSubscribers();
-        super.onDetach();
+        super.onDestroy();
     }
 }
